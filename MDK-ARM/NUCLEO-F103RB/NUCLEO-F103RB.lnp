@@ -1,0 +1,18 @@
+--cpu Cortex-M3
+"nucleo-f103rb\voilier.o"
+"nucleo-f103rb\mytimer.o"
+"nucleo-f103rb\allure.o"
+"nucleo-f103rb\anticharvirement.o"
+"nucleo-f103rb\batterie.o"
+"nucleo-f103rb\gouvernail.o"
+"nucleo-f103rb\heure.o"
+"nucleo-f103rb\transmission.o"
+"nucleo-f103rb\voile.o"
+"nucleo-f103rb\stm32f1xx_ll_rcc.o"
+"nucleo-f103rb\stm32f1xx_ll_utils.o"
+"nucleo-f103rb\system_stm32f1xx.o"
+"nucleo-f103rb\startup_stm32f103xb.o"
+--library_type=microlib --strict --scatter "NUCLEO-F103RB\NUCLEO-F103RB.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "NUCLEO-F103RB.map" -o NUCLEO-F103RB\NUCLEO-F103RB.axf
