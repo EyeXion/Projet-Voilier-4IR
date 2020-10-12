@@ -1,0 +1,4 @@
+*.lst
+*.uvguix*
+DebugConfig/
+*.scvd
