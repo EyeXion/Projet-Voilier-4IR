@@ -393,11 +393,6 @@
           <GroupName>MyDrivers</GroupName>
           <Files>
             <File>
-              <FileName>MyTimer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\MyDrivers\MyTimer.c</FilePath>
-            </File>
-            <File>
               <FileName>Allure.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Allure.c</FilePath>
@@ -432,6 +427,11 @@
               <FileType>1</FileType>
               <FilePath>..\Src\Voile.c</FilePath>
             </File>
+            <File>
+              <FileName>MyTimer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\MyTimer.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -446,6 +446,11 @@
               <FileName>stm32f1xx_ll_utils.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\LLDrivers\src\stm32f1xx_ll_utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_ll_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LLDrivers\src\stm32f1xx_ll_tim.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -864,11 +869,6 @@
           <GroupName>MyDrivers</GroupName>
           <Files>
             <File>
-              <FileName>MyTimer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\MyDrivers\MyTimer.c</FilePath>
-            </File>
-            <File>
               <FileName>Allure.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Allure.c</FilePath>
@@ -903,6 +903,11 @@
               <FileType>1</FileType>
               <FilePath>..\Src\Voile.c</FilePath>
             </File>
+            <File>
+              <FileName>MyTimer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\MyTimer.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -917,6 +922,11 @@
               <FileName>stm32f1xx_ll_utils.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\LLDrivers\src\stm32f1xx_ll_utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_ll_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LLDrivers\src\stm32f1xx_ll_tim.c</FilePath>
             </File>
           </Files>
         </Group>
