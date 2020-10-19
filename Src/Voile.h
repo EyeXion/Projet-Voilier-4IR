@@ -1,15 +1,16 @@
 #include "MyTimer.h"
 
-void confVoile(TIM_TypeDef * Timer, int channel);
+
+void ConfVoile();
 
 
-char * toString(int theta) ;
+char * ToString(int theta) ;
 
 
 int RecupTension(void);
 
 
-int calculTension(int alpha);
+int CalculerTension(int alpha);
 
 
-void tendreVoile(TIM_TypeDef * Timer, int channel, int alpha);
+void TendreVoile(int theta);
