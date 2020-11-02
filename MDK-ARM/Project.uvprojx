@@ -403,11 +403,6 @@
               <FilePath>..\Src\Allure.c</FilePath>
             </File>
             <File>
-              <FileName>AntiCharvirement.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\AntiCharvirement.c</FilePath>
-            </File>
-            <File>
               <FileName>Batterie.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Batterie.c</FilePath>
@@ -471,6 +466,11 @@
               <FileName>Voile.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Src\Voile.h</FilePath>
+            </File>
+            <File>
+              <FileName>AntiChavirement.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\AntiChavirement.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -914,11 +914,6 @@
               <FilePath>..\Src\Allure.c</FilePath>
             </File>
             <File>
-              <FileName>AntiCharvirement.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\AntiCharvirement.c</FilePath>
-            </File>
-            <File>
               <FileName>Batterie.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Batterie.c</FilePath>
@@ -982,6 +977,11 @@
               <FileName>Voile.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Src\Voile.h</FilePath>
+            </File>
+            <File>
+              <FileName>AntiChavirement.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\AntiChavirement.c</FilePath>
             </File>
           </Files>
         </Group>
