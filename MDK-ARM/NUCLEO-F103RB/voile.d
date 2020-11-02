@@ -10,5 +10,9 @@ nucleo-f103rb\voile.o: C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\
 nucleo-f103rb\voile.o: ..\Inc\system_stm32f1xx.h
 nucleo-f103rb\voile.o: ..\LLDrivers\inc\stm32f1xx_ll_gpio.h
 nucleo-f103rb\voile.o: ..\Inc\stm32f1xx.h
+nucleo-f103rb\voile.o: ..\LLDrivers\inc\stm32f1xx_ll_rcc.h
+nucleo-f103rb\voile.o: ..\LLDrivers\inc\stm32f1xx_ll_utils.h
+nucleo-f103rb\voile.o: ..\LLDrivers\inc\stm32f1xx_ll_system.h
 nucleo-f103rb\voile.o: ..\LLDrivers\inc\stm32f1xx_ll_tim.h
+nucleo-f103rb\voile.o: ..\LLDrivers\inc\stm32f1xx_ll_bus.h
 nucleo-f103rb\voile.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

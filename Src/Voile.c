@@ -5,10 +5,11 @@
 #include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_tim.h" 
+#include "stm32f1xx_ll_bus.h"
 #include "stdlib.h"  //Remplacer par maths.h quand on va tout faire marcher.
  
-#define ARR (59999)
-#define PSC (23)
+#define ARR (19999)
+#define PSC (71)
 #define Timer (TIM1)
 #define channel (1)
 #define coefa (2)
@@ -19,11 +20,14 @@
 int angleVoileActuel = 0; //angle de la voile. Mis à jour quans on la tend. de 0 à  45.
  
  void ConfVoile(){
+	 LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA);
 	 MyTimer_Conf(Timer,ARR,PSC);
 	 LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_8,LL_GPIO_MODE_ALTERNATE);
 	 LL_GPIO_SetPinOutputType(GPIOA,LL_GPIO_PIN_8,LL_GPIO_OUTPUT_PUSHPULL);
 	 LL_TIM_OC_SetMode(Timer, channel, LL_TIM_OCMODE_PWM1);
-	 Timer->CCR1 = (ARR) / 20 ; // par defaut tendu à 1ms 
+	 Timer->CCER |= TIM_CCER_CC1E;
+	 Timer->BDTR |= 0x1 << 15; 
+	 Timer->CCR1 = 1500; // par defaut tendu à 1ms 
 		MyTimer_Start(Timer);
  }
 
@@ -75,7 +79,7 @@ void SystemClock_Config(void)
   /* Enable HSE oscillator */
 	// ********* Commenter la ligne ci-dessous pour MCBSTM32 *****************
 	// ********* Conserver la ligne si Nucléo*********************************
-  LL_RCC_HSE_EnableBypass();
+ // LL_RCC_HSE_EnableBypass();
   LL_RCC_HSE_Enable();
   while(LL_RCC_HSE_IsReady() != 1)
   {
@@ -108,6 +112,7 @@ void SystemClock_Config(void)
 }
 
 int main(){
+	SystemClock_Config();
 	
 	
 	ConfVoile();
