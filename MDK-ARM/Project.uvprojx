@@ -432,6 +432,46 @@
               <FileType>1</FileType>
               <FilePath>..\Src\Voile.c</FilePath>
             </File>
+            <File>
+              <FileName>Allure.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Allure.h</FilePath>
+            </File>
+            <File>
+              <FileName>AntiChavirement.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\AntiChavirement.h</FilePath>
+            </File>
+            <File>
+              <FileName>Batterie.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Batterie.h</FilePath>
+            </File>
+            <File>
+              <FileName>Gouvernail.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Gouvernail.h</FilePath>
+            </File>
+            <File>
+              <FileName>Heure.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Heure.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyTimer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\MyTimer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Transmission.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Transmission.h</FilePath>
+            </File>
+            <File>
+              <FileName>Voile.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Voile.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -902,6 +942,46 @@
               <FileName>Voile.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Voile.c</FilePath>
+            </File>
+            <File>
+              <FileName>Allure.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Allure.h</FilePath>
+            </File>
+            <File>
+              <FileName>AntiChavirement.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\AntiChavirement.h</FilePath>
+            </File>
+            <File>
+              <FileName>Batterie.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Batterie.h</FilePath>
+            </File>
+            <File>
+              <FileName>Gouvernail.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Gouvernail.h</FilePath>
+            </File>
+            <File>
+              <FileName>Heure.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Heure.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyTimer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\MyTimer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Transmission.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Transmission.h</FilePath>
+            </File>
+            <File>
+              <FileName>Voile.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Voile.h</FilePath>
             </File>
           </Files>
         </Group>
