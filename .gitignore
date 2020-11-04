@@ -1,6 +1,6 @@
 MDK-ARM/DebugConfig/
+MDK-ARM/NUCLEO-F103RB
 MDK-ARM/*.scvd
-MDK-ARM/NUCLEO-F103RB/
 MDK-ARM/*.uvguix.*
 MDK-ARM/RTE/
 *.lst

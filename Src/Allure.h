@@ -9,15 +9,17 @@
 	* @param  None
   * @retval None
   */
-void ConfAllure();
+void ConfAllure(void);
 
 /**
 	* @brief  Renvoi la valeur de l'allure actuelle
   * @note   Représentation de la donnée en degrès -> int entre -180 et 180 
+						ATTENTION : -1000 renvoyé si girouette non initialisée
 	* @param  None
   * @retval L'allure, représenté en degrès par un entier entre -180 et 180
+						ATTENTION : -1000 renvoyé si girouette non initialisée
   */
-int RecupAllure();
+int RecupAllure(void);
 
 /**
 	* @brief  Associe un chaine de caractère a une valeur d'allure.
