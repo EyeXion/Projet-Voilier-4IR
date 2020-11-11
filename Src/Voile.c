@@ -39,13 +39,14 @@ int RecupTension(void){
 
 
 int CalculerTension(int alpha){
-	if (abs(alpha) > 45){
+	return alpha;
+	/*if (abs(alpha) > 45){
 		return 0;
 	}
 	else {
 		int res = alpha * coefa + coefb;
 		return res;
-	}
+	}*/
 }
 
 

@@ -4,7 +4,6 @@
 #include "stm32f1xx_ll_tim.h" // TIMER
 #include "stm32f1xx_ll_exti.h" // External Interrup
 
-int allure;
 int initialized = 0;
 
 /**
@@ -60,9 +59,9 @@ void ConfAllure(void) {
 
 int RecupAllure(void) {
 	if (!initialized) {
-		return -1000;
+		return 10000;
 	} else {
-		return ((int)LL_TIM_GetCounter(TIM3)) - 180;
+		return ((int)LL_TIM_GetCounter(TIM3)) * 50;
 	}
 }
 
