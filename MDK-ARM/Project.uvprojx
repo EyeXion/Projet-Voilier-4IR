@@ -448,14 +448,14 @@
               <FilePath>..\LLDrivers\src\stm32f1xx_ll_utils.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f1xx_ll_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LLDrivers\src\stm32f1xx_ll_tim.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f1xx_ll_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\LLDrivers\src\stm32f1xx_ll_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_ll_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LLDrivers\src\stm32f1xx_ll_tim.c</FilePath>
             </File>
             <File>
               <FileName>stm32f1xx_ll_exti.c</FileName>
@@ -934,14 +934,14 @@
               <FilePath>..\LLDrivers\src\stm32f1xx_ll_utils.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f1xx_ll_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LLDrivers\src\stm32f1xx_ll_tim.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f1xx_ll_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\LLDrivers\src\stm32f1xx_ll_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_ll_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LLDrivers\src\stm32f1xx_ll_tim.c</FilePath>
             </File>
             <File>
               <FileName>stm32f1xx_ll_exti.c</FileName>
