@@ -26,6 +26,7 @@ void (*Ptr_ItFct_TIM4)(void);
 
 
 
+
 /**
 	* @brief  Active l'horloge et règle l'ARR et le PSC du timer visé
   * @note   Fonction à lancer avant toute autre. Le timer n'est pas encore lancé (voir MyTimerStart)
