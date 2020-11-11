@@ -6,20 +6,20 @@
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_tim.h" 
 #include "stm32f1xx_ll_bus.h"
-#include "stdlib.h"  //Remplacer par maths.h quand on va tout faire marcher.
+#include "maths.h"  //Remplacer par maths.h quand on va tout faire marcher.
  
 #define ARR (19999)
 #define PSC (71)
 #define Timer (TIM1)
 #define channel (1)
-#define coefa (2)
-#define coefb (1)
-#define coefc (2)
-#define coefd (1)
+#define coefa (1)
+#define coefb (0)
+#define coefc (1)
+#define coefd (0)
 
 int angleVoileActuel = 0; //angle de la voile. Mis à jour quans on la tend. de 0 à  45.
  
- void ConfVoile(){
+void ConfVoile(void){
 	 LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA);
 	 MyTimer_Conf(Timer,ARR,PSC);
 	 LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_8,LL_GPIO_MODE_ALTERNATE);
@@ -39,7 +39,7 @@ int RecupTension(void){
 
 
 int CalculerTension(int alpha){
-	if (0 < abs(alpha) && abs(alpha) > 45){
+	if (abs(alpha) > 45){
 		return 0;
 	}
 	else {

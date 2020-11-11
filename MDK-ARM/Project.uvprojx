@@ -10,7 +10,7 @@
       <TargetName>NUCLEO-F103RB</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::.\ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -431,6 +431,11 @@
               <FileName>MyTimer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\MyTimer.c</FilePath>
+            </File>
+            <File>
+              <FileName>maths.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\maths.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -917,6 +922,11 @@
               <FileName>MyTimer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\MyTimer.c</FilePath>
+            </File>
+            <File>
+              <FileName>maths.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\maths.c</FilePath>
             </File>
           </Files>
         </Group>

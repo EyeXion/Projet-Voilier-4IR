@@ -61,10 +61,10 @@ void SystemClock_Config(void)
   */
 void Setup(){
 	SystemClock_Config();
-	ConfAntiChavirement();
+	//ConfAntiChavirement();
 	ConfAllure();
 	ConfVoile();
-	ConfGouvernail();
+	//ConfGouvernail();
 	
 	
 }
@@ -98,7 +98,7 @@ void Background(){
 	TendreVoile(tensionVoile); //on tend la voile grâce à la tension obtenue
 	
 	//Gouvernail 
-	int valeurTelecommande = LireTelecommande(); //on lit la valeur renvoyée par la télécommande
+	/*int valeurTelecommande = LireTelecommande(); //on lit la valeur renvoyée par la télécommande
 	int vitesse = CalculerVitesse(valeurTelecommande);//gràace à la valeur de la telecommande on calcule la vitesse souhaitée
 	CommanderMoteur(vitesse);//On commande le moteur pour aller à la vitesse voulue
 	
@@ -107,7 +107,7 @@ void Background(){
 	int danger = CalculerDanger(rouli);//renvoi boolean : int à 0 si faux et 1 si vrai
 	if(danger){
 		TendreVoile(90); //si il y a danger on relache les voiles (relacher les voiles = les mettre à 90)
-	}
+	}*/
 	
 }
 
@@ -116,5 +116,4 @@ int main(){
 	while(1){
 		Background();
 	}
-	return 0;
 }

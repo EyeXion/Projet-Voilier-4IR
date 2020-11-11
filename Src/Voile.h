@@ -1,7 +1,7 @@
 #include "MyTimer.h"
 
 
-void ConfVoile();
+void ConfVoile(void);
 
 
 char * ToString(int theta) ;
