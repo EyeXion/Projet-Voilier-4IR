@@ -432,26 +432,6 @@
               <FileType>1</FileType>
               <FilePath>..\Src\Voile.c</FilePath>
             </File>
-            <File>
-              <FileName>Allure.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\Allure.h</FilePath>
-            </File>
-            <File>
-              <FileName>MyTimer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\MyDrivers\MyTimer.h</FilePath>
-            </File>
-            <File>
-              <FileName>maths.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\maths.h</FilePath>
-            </File>
-            <File>
-              <FileName>maths.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\maths.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -937,26 +917,6 @@
               <FileName>Voile.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Voile.c</FilePath>
-            </File>
-            <File>
-              <FileName>Allure.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\Allure.h</FilePath>
-            </File>
-            <File>
-              <FileName>MyTimer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\MyDrivers\MyTimer.h</FilePath>
-            </File>
-            <File>
-              <FileName>maths.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\maths.h</FilePath>
-            </File>
-            <File>
-              <FileName>maths.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\maths.c</FilePath>
             </File>
           </Files>
         </Group>
