@@ -25,7 +25,7 @@ void Setup(){
 	//ConfAntiChavirement();
 	ConfAllure();
 	ConfVoile();
-	//ConfGouvernail();
+	ConfGouvernail();
 	
 	
 }

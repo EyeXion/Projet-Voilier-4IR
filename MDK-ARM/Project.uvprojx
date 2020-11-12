@@ -452,6 +452,11 @@
               <FileType>1</FileType>
               <FilePath>..\Src\maths.c</FilePath>
             </File>
+            <File>
+              <FileName>Gouvernail.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Gouvernail.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -957,6 +962,11 @@
               <FileName>maths.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\maths.c</FilePath>
+            </File>
+            <File>
+              <FileName>Gouvernail.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Gouvernail.h</FilePath>
             </File>
           </Files>
         </Group>
