@@ -59,9 +59,14 @@ void ConfAllure(void) {
 
 int RecupAllure(void) {
 	if (!initialized) {
-		return 10000;
+		return 180; //Si jamais la girouette n'est pas initialisée, on relache les voiles (comme en cas d'alerte dee chavirement)
 	} else {
-		return ((int)LL_TIM_GetCounter(TIM3)) * 50;
+		int retourCapteur = (int)LL_TIM_GetCounter(TIM3);
+		if (retourCapteur < 180) {
+			return retourCapteur;
+		} else {
+			return retourCapteur - 360;
+		}
 	}
 }
 

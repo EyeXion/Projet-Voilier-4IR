@@ -12,10 +12,12 @@
 #define PSC (71)
 #define Timer (TIM1)
 #define channel (1)
-#define coefa (1)
-#define coefb (0)
-#define coefc (1)
-#define coefd (0)
+#define A_ALPHA_TO_BETA (2.0/3.0) //Coefficient directeur de la partie linéaire de la fonction transformant l'allure en angle de voile
+#define B_ALPHA_TO_BETA (-30.0) //Ordonnée a l'origine de cette même fonction
+#define GAMMA_90 (19900) //Valeur du registre commandant la largeur de la PWM pour les voiles lachées
+#define GAMMA_0 (100) //Valeur du registre commandant la largeur de la PWM pour les voiles bordées au maximum
+#define A_BETA_TO_GAMMA ((GAMMA_90 - GAMMA_0)/90.0) //Coefficient directeur de la relation entre l'angle de voile et la PWM
+#define B_BETA_TO_GAMMA (GAMMA_0) //Ordonnée a l'origine
 
 int angleVoileActuel = 0; //angle de la voile. Mis à jour quans on la tend. de 0 à  45.
  
@@ -28,29 +30,27 @@ void ConfVoile(void){
 	 Timer->CCER |= TIM_CCER_CC1E;
 	 Timer->BDTR |= 0x1 << 15; 
 	 Timer->CCR1 = 1500; // par defaut tendu à 1ms 
-		MyTimer_Start(Timer);
- }
+	 MyTimer_Start(Timer);
+}
 
 
 
 int RecupTension(void){
 	return angleVoileActuel;
-	}
+}
 
 
 int CalculerTension(int alpha){
-	return alpha;
-	/*if (abs(alpha) > 45){
+	if (abs(alpha) < 45){
 		return 0;
+	} else {
+		float res = A_ALPHA_TO_BETA * (float)abs(alpha) + B_ALPHA_TO_BETA;
+		return (int)res;
 	}
-	else {
-		int res = alpha * coefa + coefb;
-		return res;
-	}*/
 }
 
 
 void TendreVoile(int theta)
 {
-	Timer->CCR1 = coefc * theta + coefd ;
+	Timer->CCR1 = (int)(A_BETA_TO_GAMMA * (float)theta + B_BETA_TO_GAMMA) ;
 }
