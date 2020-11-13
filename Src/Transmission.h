@@ -8,8 +8,6 @@
 #include "Voile.h"
 
 
-int drapeauTransmission;
-
 
 void EnvoiRegulier(char * Allure, char * tension);
 

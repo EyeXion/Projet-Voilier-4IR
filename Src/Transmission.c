@@ -2,6 +2,8 @@
 
 int msTicks = 0;
 
+int drapeauTransmission = 1;
+
 void ConfSysTick(){
 	NVIC_EnableIRQ(SysTick_IRQn);
 	SysTick_Config(7200000);
@@ -97,16 +99,15 @@ int main(){
 	SystemClock_Config();
 	ConfSysTick();
 	ConfTransmission();
-	drapeauTransmission = 1;
+	char * msg1 = "ok ";
+	char * msg2 = "coucou ";
+	//EnvoiRegulier(ToString(RecupAllure()),ToString(RecupTension()));
 	
 	
 	while(1){
-		if (drapeauTransmission == 1){
-			drapeauTransmission = 0;
-			//EnvoiMessageRegulier(ToString(RecupAllure()),ToString(RecupTension()));
-			char * msg1 = "ok ";
-			char * msg2 = "coucou ";
+		if (drapeauTransmission){
 			EnvoiRegulier(msg1, msg2);
+			drapeauTransmission = 0;
 		}
 	}
 }
