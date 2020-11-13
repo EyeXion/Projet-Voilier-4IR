@@ -403,11 +403,6 @@
               <FilePath>..\Src\Allure.c</FilePath>
             </File>
             <File>
-              <FileName>AntiCharvirement.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\AntiCharvirement.c</FilePath>
-            </File>
-            <File>
               <FileName>Batterie.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Batterie.c</FilePath>
@@ -451,6 +446,11 @@
               <FileName>maths.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\maths.c</FilePath>
+            </File>
+            <File>
+              <FileName>Transmission.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Transmission.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -909,11 +909,6 @@
               <FilePath>..\Src\Allure.c</FilePath>
             </File>
             <File>
-              <FileName>AntiCharvirement.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\AntiCharvirement.c</FilePath>
-            </File>
-            <File>
               <FileName>Batterie.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Batterie.c</FilePath>
@@ -957,6 +952,11 @@
               <FileName>maths.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\maths.c</FilePath>
+            </File>
+            <File>
+              <FileName>Transmission.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Transmission.h</FilePath>
             </File>
           </Files>
         </Group>
