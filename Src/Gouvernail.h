@@ -3,7 +3,7 @@
 
 /**
 	* @brief  Configure le récepteur de la télécommande ainsi que le plateau rotatif.
-  * @note   Configuration du port PB6 et 7 en alternate input pour récupérer les signaux
+  * @note   Configuration du port PB6 et 7 en alternate input pour récupérer les signaux de la télécommande
 						Configuration des deux channels du TIM4 pour la lecture de la PWM 
 						Configuration du PA1 en alternate output (commande PWM vitesse) et PA2 en output push pull pour commander le sens
 						Configuration du TIM2_CH2 pour la sortie PWM

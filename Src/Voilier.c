@@ -10,8 +10,6 @@
 #include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
 
-
-
 void SystemClock_Config(void);
 
 /**
@@ -59,15 +57,9 @@ void Background(){
 	TendreVoile(CalculerTension(RecupAllure())); //on tend la voile grâce à la tension obtenue
 	
 	//Gouvernail 
-	//int commande = LireTelecommande(); //on lit la valeur renvoyée par la télécommande
-	CommanderMoteur(0); //On commande le moteur pour aller à la vitesse voulue
-	CommanderMoteur(-0);
-	CommanderMoteur(-1);
-	CommanderMoteur(1);
-	CommanderMoteur(-50);
-	CommanderMoteur(50);
-	CommanderMoteur(-100);
-	CommanderMoteur(100);
+	int commande = LireTelecommande(); //on lit la valeur renvoyée par la télécommande
+	CommanderMoteur(commande); //On commande le moteur pour aller à la vitesse voulue
+	
 	//Anti-Chavirement
 	/*int rouli = RecupRouli();
 	int danger = CalculerDanger(rouli);//renvoi boolean : int à 0 si faux et 1 si vrai
@@ -138,7 +130,7 @@ void SystemClock_Config(void)
   LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
 
   /* Set systick to 1ms in using frequency set to 72MHz */
-  //LL_Init1msTick(72000000); !! décommenter que si l'IT est récupérée
+  LL_Init1msTick(72000000); //!! décommenter que si l'IT est récupérée
 
   /* Update CMSIS variable (which can be updated also through SystemCoreClockUpdate function) */
   LL_SetSystemCoreClock(72000000);
