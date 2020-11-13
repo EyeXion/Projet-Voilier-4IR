@@ -1,6 +1,9 @@
 #include "stm32f1xx_ll_gpio.h" // GPIO
 #include "stm32f1xx_ll_bus.h" // RCC
 #include "stm32f1xx_ll_tim.h" // TIMER
+#include "maths.h"
+
+#define MAX_PWM (19999)
 
 /**
 	* @brief  Configure le récepteur de la télécommande ainsi que le plateau rotatif.
@@ -22,8 +25,9 @@ void ConfGouvernail(void) {
 	LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_7, LL_GPIO_MODE_FLOATING);
 	LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_1, LL_GPIO_MODE_ALTERNATE); 
 	LL_GPIO_SetPinOutputType(GPIOA, LL_GPIO_PIN_1, LL_GPIO_OUTPUT_PUSHPULL);
-	LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_2, LL_GPIO_MODE_OUTPUT); 
+	LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_2, LL_GPIO_MODE_OUTPUT_2MHz); 
 	LL_GPIO_SetPinOutputType(GPIOA, LL_GPIO_PIN_2, LL_GPIO_OUTPUT_PUSHPULL);
+	LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_2);
 	
 	
 	//Configuration des timers
@@ -36,7 +40,7 @@ void ConfGouvernail(void) {
 	LL_TIM_OC_StructInit(&Tim2Initializer);
 	Tim2Initializer.OCMode = LL_TIM_OCMODE_PWM1;
 	LL_TIM_OC_Init(TIM2, LL_TIM_CHANNEL_CH2, &Tim2Initializer);
-	LL_TIM_SetAutoReload(TIM2, 19999);
+	LL_TIM_SetAutoReload(TIM2, MAX_PWM);
 	LL_TIM_SetPrescaler(TIM2, 71);
 	LL_TIM_OC_SetCompareCH2(TIM2, 0);
 	LL_TIM_EnableCounter(TIM2);
@@ -60,4 +64,10 @@ int LireTelecommande(void) {
   * @retval None
   */
 void CommanderMoteur(int commande) {
+	if (commande < 0) {
+		LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_2);
+	} else {
+		LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_2);
+	}
+	LL_TIM_OC_SetCompareCH2(TIM2, (int)(((float)abs(commande)) * (((float)MAX_PWM) / 100.0)));
 }

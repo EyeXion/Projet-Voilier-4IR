@@ -59,12 +59,17 @@ void Background(){
 	TendreVoile(CalculerTension(RecupAllure())); //on tend la voile grâce à la tension obtenue
 	
 	//Gouvernail 
-	/*int valeurTelecommande = LireTelecommande(); //on lit la valeur renvoyée par la télécommande
-	int vitesse = CalculerVitesse(valeurTelecommande);//gràace à la valeur de la telecommande on calcule la vitesse souhaitée
-	CommanderMoteur(vitesse);//On commande le moteur pour aller à la vitesse voulue
-	
+	//int commande = LireTelecommande(); //on lit la valeur renvoyée par la télécommande
+	CommanderMoteur(0); //On commande le moteur pour aller à la vitesse voulue
+	CommanderMoteur(-0);
+	CommanderMoteur(-1);
+	CommanderMoteur(1);
+	CommanderMoteur(-50);
+	CommanderMoteur(50);
+	CommanderMoteur(-100);
+	CommanderMoteur(100);
 	//Anti-Chavirement
-	int rouli = RecupRouli();
+	/*int rouli = RecupRouli();
 	int danger = CalculerDanger(rouli);//renvoi boolean : int à 0 si faux et 1 si vrai
 	if(danger){
 		TendreVoile(90); //si il y a danger on relache les voiles (relacher les voiles = les mettre à 90)
