@@ -447,6 +447,11 @@
               <FileType>1</FileType>
               <FilePath>..\Src\maths.c</FilePath>
             </File>
+            <File>
+              <FileName>Transmission.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Transmission.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -947,6 +952,11 @@
               <FileName>maths.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\maths.c</FilePath>
+            </File>
+            <File>
+              <FileName>Transmission.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Transmission.h</FilePath>
             </File>
           </Files>
         </Group>

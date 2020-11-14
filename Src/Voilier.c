@@ -3,7 +3,7 @@
 #include "Batterie.h"
 #include "Gouvernail.h"
 #include "Heure.h"
-#include "Transmission.h"
+//#include "Transmission.h"
 #include "Voile.h"
 
 #include "stm32f1xx_ll_rcc.h" // utile dans la fonction SystemClock_Config
@@ -81,7 +81,7 @@ int main(){
 	while(1){
 		Background();
 	}
-}
+} 
 
 
 /**
@@ -139,6 +139,7 @@ void SystemClock_Config(void)
   LL_SetSystemCoreClock(72000000);
 }
 
+/* METTRE SYSTEMCLOCKCONFIG */
 
 
 /* ==============   BOARD SPECIFIC CONFIGURATION CODE END      ============== */
