@@ -36,6 +36,6 @@ int RecupAllure(void);
 	* @param  alpha : un entier représentant l'allure en ° (-180 à 180)
   * @retval Une chaine de caractère représentant l'allure
   */
-char * ToString(int alpha);
+char * AllureToString(int alpha);
 
 #endif

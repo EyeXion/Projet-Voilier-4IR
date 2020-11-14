@@ -11,7 +11,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
-      <uAC6>8</uAC6>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103RB</Device>
@@ -393,19 +393,9 @@
           <GroupName>MyDrivers</GroupName>
           <Files>
             <File>
-              <FileName>MyTimer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\MyDrivers\MyTimer.c</FilePath>
-            </File>
-            <File>
               <FileName>Allure.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Allure.c</FilePath>
-            </File>
-            <File>
-              <FileName>Batterie.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\Batterie.c</FilePath>
             </File>
             <File>
               <FileName>Gouvernail.c</FileName>
@@ -428,35 +418,14 @@
               <FilePath>..\Src\Voile.c</FilePath>
             </File>
             <File>
-              <FileName>Allure.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\Allure.h</FilePath>
-            </File>
-            <File>
-              <FileName>MyTimer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\MyDrivers\MyTimer.h</FilePath>
-            </File>
-            <File>
-              <FileName>maths.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\maths.h</FilePath>
-            </File>
-            <File>
               <FileName>maths.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\maths.c</FilePath>
             </File>
             <File>
-<<<<<<< HEAD
-              <FileName>Transmission.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\Transmission.h</FilePath>
-=======
-              <FileName>Gouvernail.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\Gouvernail.h</FilePath>
->>>>>>> Gouvernail
+              <FileName>Securite.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\Securite.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -905,19 +874,9 @@
           <GroupName>MyDrivers</GroupName>
           <Files>
             <File>
-              <FileName>MyTimer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\MyDrivers\MyTimer.c</FilePath>
-            </File>
-            <File>
               <FileName>Allure.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Allure.c</FilePath>
-            </File>
-            <File>
-              <FileName>Batterie.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\Batterie.c</FilePath>
             </File>
             <File>
               <FileName>Gouvernail.c</FileName>
@@ -940,35 +899,14 @@
               <FilePath>..\Src\Voile.c</FilePath>
             </File>
             <File>
-              <FileName>Allure.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\Allure.h</FilePath>
-            </File>
-            <File>
-              <FileName>MyTimer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\MyDrivers\MyTimer.h</FilePath>
-            </File>
-            <File>
-              <FileName>maths.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\maths.h</FilePath>
-            </File>
-            <File>
               <FileName>maths.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\maths.c</FilePath>
             </File>
             <File>
-<<<<<<< HEAD
-              <FileName>Transmission.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\Transmission.h</FilePath>
-=======
-              <FileName>Gouvernail.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\Gouvernail.h</FilePath>
->>>>>>> Gouvernail
+              <FileName>Securite.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\Securite.c</FilePath>
             </File>
           </Files>
         </Group>

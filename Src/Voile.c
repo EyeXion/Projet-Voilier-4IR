@@ -1,4 +1,3 @@
-
 #include "Voile.h"
 #include "stm32f1xx_ll_gpio.h"
 #include "stm32f1xx_ll_rcc.h" // utile dans la fonction SystemClock_Config
@@ -23,19 +22,20 @@ int angleVoileActuel = 0; //angle de la voile. Mis à jour quans on la tend. de 0
  
 void ConfVoile(void){
 	 LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA);
-	 MyTimer_Conf(Timer,ARR,PSC);
+	 LL_TIM_SetAutoReload(Timer, ARR);
+	 LL_TIM_SetPrescaler(Timer, PSC);
 	 LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_8,LL_GPIO_MODE_ALTERNATE);
 	 LL_GPIO_SetPinOutputType(GPIOA,LL_GPIO_PIN_8,LL_GPIO_OUTPUT_PUSHPULL);
 	 LL_TIM_OC_SetMode(Timer, channel, LL_TIM_OCMODE_PWM1);
 	 Timer->CCER |= TIM_CCER_CC1E;
 	 Timer->BDTR |= 0x1 << 15; 
 	 Timer->CCR1 = 1500; // par defaut tendu à 1ms 
-	 MyTimer_Start(Timer);
+	 LL_TIM_EnableCounter(Timer);
 }
 
 
 
-int RecupTension(void){
+int RecupTensionVoile(void){
 	return angleVoileActuel;
 }
 
@@ -53,4 +53,8 @@ int CalculerTension(int alpha){
 void TendreVoile(int theta)
 {
 	Timer->CCR1 = (int)(A_BETA_TO_GAMMA * (float)theta + B_BETA_TO_GAMMA) ;
+}
+
+char * TensionVoileToString(int theta) {
+	return "";
 }

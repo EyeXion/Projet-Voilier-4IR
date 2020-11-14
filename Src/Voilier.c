@@ -1,16 +1,41 @@
 #include "Allure.h"
-#include "AntiChavirement.h"
-#include "Batterie.h"
 #include "Gouvernail.h"
-#include "Heure.h"
-//#include "Transmission.h"
+//#include "Heure.h"
+#include "Transmission.h"
 #include "Voile.h"
+#include "Securite.h"
 
 #include "stm32f1xx_ll_rcc.h" // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
 
 void SystemClock_Config(void);
+
+extern int drapeauRecupSecurite; // Flag qui est mis à 1 toute les 10 sec pour recuperer niveau batterie/rouli et envoi régulier
+extern int drapeauDangerBatterie; //Flag qui est mis à 1 toute les 10 sec si batterie faible --> envoie message alarme
+extern int drapeauDangerRouli; //Flag qui est mis à 1 toute les 10 sec si rouli pas bon --> envoie message alarme
+extern int drapeauTransmission;
+
+void ConfSysTick(){
+	NVIC_EnableIRQ(SysTick_IRQn);
+	SysTick_Config(7200000);
+}
+
+void SysTick_Handler(void)  {                               /* SysTick interrupt Handler. */
+	static int msTicks = 0;
+	
+	msTicks++;  
+	
+	if (msTicks % 30 == 0){
+		drapeauTransmission = 1;
+	}
+	
+	if (msTicks % 90 == 0) {
+		drapeauRecupSecurite = 1;
+		msTicks = 0;
+	}
+	
+}
 
 /**
 	* @brief configure tous les periphs qu'on va utiliser en appelant les
@@ -20,10 +45,12 @@ void SystemClock_Config(void);
   * @retval None
   */
 void Setup(){
-	//ConfAntiChavirement();
+	ConfSecurite();
 	ConfAllure();
 	ConfVoile();
 	ConfGouvernail();
+	ConfTransmission();
+	ConfSysTick();
 
 
 }
@@ -76,7 +103,36 @@ int main(){
 	Setup();
 
 	while(1){
-		Background();
+		int level ;
+		int rouli;
+		/* Envoi message toute les 3 sec sur l'Allure et la tension voile */
+		if (drapeauTransmission){ 
+			EnvoiRegulier(AllureToString(RecupAllure()), TensionVoileToString(RecupTensionVoile()));
+			drapeauTransmission = 0;
+		}
+		
+		/* Recuperation toute les 10 sec niveau batterie et angle chavirement, puis calcul des dangers */
+		if (drapeauRecupSecurite){
+			level = RecupNiveauBatterie();
+			CalculDangerNiveauBatterie( level );
+			rouli = RecupRouli();
+			CalculerDangerChavirement(rouli);
+			drapeauRecupSecurite = 0;
+		}
+		
+		/*Si batterie faible après recup (toute les 10 sec), envoi alerte batterie faible */
+		if (drapeauDangerBatterie){
+			char * msgBatterie = "Batterie faible";
+			EnvoiExceptionnel(msgBatterie);
+			drapeauDangerBatterie = 0;
+		}
+		
+		/*Si angle chavirement pas bon après recup (toute les 10 sec), envoi alerte chavirement */
+		if (drapeauDangerRouli){
+			char * msgRouli = "Bateau chavire !";
+			EnvoiExceptionnel(msgRouli);
+			drapeauDangerRouli = 0;
+		}
 	}
 }
 
@@ -171,3 +227,4 @@ void assert_failed(uint8_t *file, uint32_t line)
   */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

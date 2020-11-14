@@ -70,7 +70,7 @@ int RecupAllure(void) {
 	}
 }
 
-char * ToString(int alpha) {
+char * AllureToString(int alpha) {
 	int alpha_abs = abs(alpha);
 	if (alpha_abs < 45) {
 		return "Vent debout";

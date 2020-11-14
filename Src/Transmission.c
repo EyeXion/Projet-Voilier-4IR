@@ -1,27 +1,13 @@
-#include "Transmission.h"
-
-int msTicks = 0;
+#include "stm32f1xx_ll_bus.h"
+#include "stm32f1xx_ll_gpio.h"
+#include "stm32f1xx_ll_utils.h"
+#include "stm32f1xx_ll_usart.h"
+#include "stm32f1xx_ll_rcc.h"
+#include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
+#include "Allure.h"
+#include "Voile.h"
 
 int drapeauTransmission = 1;
-
-void ConfSysTick(){
-	NVIC_EnableIRQ(SysTick_IRQn);
-	SysTick_Config(7200000);
-}
-
-void SysTick_Handler(void)  {                               /* SysTick interrupt Handler. */
-  msTicks++;  
-	
-	if (msTicks % 30 == 0){
-		drapeauTransmission = 1;
-	}
-	
-	if (msTicks % 90 == 0) {
-		drapeauRecupSecurite = 1;
-		msTicks = 0;
-	}
-	
-}
 
 void ConfTransmission(){
 	
@@ -72,60 +58,4 @@ void EnvoiExceptionnel(char * msgAlarme){
 		}
 	} 
 	
-}
-
-void SystemClock_Config(void)
-{
-  /* Set FLASH latency */
-  LL_FLASH_SetLatency(LL_FLASH_LATENCY_2);
-
-  /* Enable HSE oscillator */
-	// ********* Commenter la ligne ci-dessous pour MCBSTM32 *****************
-	// ********* Conserver la ligne si Nucléo*********************************
-  LL_RCC_HSE_EnableBypass();
-  LL_RCC_HSE_Enable();
-  while(LL_RCC_HSE_IsReady() != 1)
-  {
-  };
-
-  /* Main PLL configuration and activation */
-  LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSE_DIV_1, LL_RCC_PLL_MUL_9);
-
-  LL_RCC_PLL_Enable();
-  while(LL_RCC_PLL_IsReady() != 1)
-  {
-  };
-
-  /* Sysclk activation on the main PLL */
-  LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
-  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
-  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
-  {
-  };
-
-  /* Set APB1 & APB2 prescaler*/
-  LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_2);
-  LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
-
-  /* Set systick to 1ms in using frequency set to 72MHz */
-  LL_Init1msTick(72000000); // utile lorsqu'on utilise la fonction LL_mDelay
-
-  /* Update CMSIS variable (which can be updated also through SystemCoreClockUpdate function) */
-  LL_SetSystemCoreClock(72000000);
-}
-
-int main(){
-	SystemClock_Config();
-	ConfSysTick();
-	ConfTransmission();
-	char * msg1 = "ok ";
-	char * msg2 = "coucou ";	
-	
-	while(1){
-		if (drapeauTransmission){
-			//EnvoiRegulier(ToString(RecupAllure()),ToString(RecupTension()));
-			EnvoiRegulier(msg1, msg2);
-			drapeauTransmission = 0;
-		}
-	}
 }

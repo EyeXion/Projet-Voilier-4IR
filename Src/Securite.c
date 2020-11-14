@@ -1,4 +1,11 @@
-#include "Securite.h"
+#include "stm32f103xb.h" 
+#include "stm32f1xx_ll_adc.h"
+#include "stm32f1xx_ll_gpio.h"
+#include "stm32f1xx_ll_bus.h"
+#include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
+#include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
+#include "stm32f1xx_ll_rcc.h" // utile dans la fonction SystemClock_Config
+#include "Voile.h"
 
 
 // Seuil represente la valeur (en %) en dessous de laquelle le niveau de batterie est consideree faible
@@ -11,7 +18,6 @@
 int drapeauRecupSecurite = 0; // Flag qui est mis à 1 toute les 10 sec pour recuperer niveau batterie/rouli et envoi régulier
 int drapeauDangerBatterie = 0; //Flag qui est mis à 1 toute les 10 sec si batterie faible --> envoie message alarme
 int drapeauDangerRouli = 0; //Flag qui est mis à 1 toute les 10 sec si rouli pas bon --> envoie message alarme
-
 
 void ConfSecurite(){
 	//On est pas sûrs pour ADC 1, voir datasheet page 28
@@ -139,87 +145,3 @@ int RecupRouli(){
 		return 0; // Trouver le calcul de l'angle
 }
 
-void SystemClock_Config(void)
-{
-  /* Set FLASH latency */
-  LL_FLASH_SetLatency(LL_FLASH_LATENCY_2);
-
-  /* Enable HSE oscillator */
-	// ********* Commenter la ligne ci-dessous pour MCBSTM32 *****************
-	// ********* Conserver la ligne si Nucléo*********************************
-  LL_RCC_HSE_EnableBypass();
-  LL_RCC_HSE_Enable();
-  while(LL_RCC_HSE_IsReady() != 1)
-  {
-  };
-
-  /* Main PLL configuration and activation */
-  LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSE_DIV_1, LL_RCC_PLL_MUL_9);
-
-  LL_RCC_PLL_Enable();
-  while(LL_RCC_PLL_IsReady() != 1)
-  {
-  };
-
-  /* Sysclk activation on the main PLL */
-  LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
-  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
-  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
-  {
-  };
-
-  /* Set APB1 & APB2 prescaler*/
-  LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_2);
-  LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
-
-  /* Set systick to 1ms in using frequency set to 72MHz */
-  LL_Init1msTick(72000000); // utile lorsqu'on utilise la fonction LL_mDelay
-
-  /* Update CMSIS variable (which can be updated also through SystemCoreClockUpdate function) */
-  LL_SetSystemCoreClock(72000000);
-}
-
-int res10;
-int level ;
-int danger;
-int rouli;
-
-//Dans le main voilier.c en theorie
-int main(){
-	SystemClock_Config();
-	ConfSecurite();
-	
-	
-	while(1){
-		
-		/* Envoi message toute les 3 sec sur l'Allure et la tension voile */
-		if (drapeauTransimission){ 
-			//Envoi message régulier
-			drapeauTransmission = 0;
-		}
-		
-		/* Recuperation toute les 10 sec niveau batterie et angle chavirement, puis calcul des dangers */
-		if (drapeauRecupSecurite){
-			level = RecupNiveauBatterie();
-			CalculDangerNiveauBatterie( level );
-			rouli = RecupRouli()
-			CalculerDanger(rouli);
-			drapeauRecupSecurite = 0;
-		}
-		
-		/*Si batterie faible après recup (toute les 10 sec), envoi alerte batterie faible */
-		if (drapeauDangerBatterie){
-			char * msgBatterie = "Batterie faible";
-			EnvoiExcpetionnel(msgBatterie);
-			drapeauDangerBatterie = 0;
-		}
-		
-		/*Si angle chavirement pas bon après recup (toute les 10 sec), envoi alerte chavirement */
-		if (drapeauDangerRouli){
-			char * msgRouli = "Bateau chavire !";
-			EnvoiExcpetionnel(msgRouli);
-			drapeauDangerRouli = 0;
-		}
-		
-	}
-}

@@ -1,15 +1,5 @@
-#ifndef ANTI_CHAVIREMENT_H
-#define ANTI_CHAVIREMENT_H
-
-#include "stm32f103xb.h" 
-#include "stm32f1xx_ll_adc.h"
-#include "stm32f1xx_ll_gpio.h"
-#include "stm32f1xx_ll_bus.h"
-#include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
-#include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
-#include "stm32f1xx_ll_rcc.h" // utile dans la fonction SystemClock_Config
-
-
+#ifndef SECURITE_H
+#define SECURITE_H
 
 /**
 	* @brief  
@@ -17,7 +7,7 @@
 	* @param  
   * @retval 
   */
-void CalculerDanger(int gamma);
+void CalculerDangerChavirement(int gamma);
 
 /**
 	* @brief  
@@ -25,7 +15,7 @@ void CalculerDanger(int gamma);
 	* @param  
   * @retval 
   */
-int RecupRouli();
+int RecupRouli(void);
 
 
 /**
@@ -42,7 +32,7 @@ int RecupNiveauBatterie(void);
 	* @param  
   * @retval 
   */
-void confSecurite(void);
+void ConfSecurite(void);
 
 /**
 	* @brief  
@@ -50,6 +40,6 @@ void confSecurite(void);
 	* @param  
   * @retval 
   */
-void CalculDangerNiveauBatterie(int niveau );
+void CalculDangerNiveauBatterie(int niveau);
 
 #endif

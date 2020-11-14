@@ -3539,12 +3539,8 @@ __STATIC_INLINE uint32_t LL_ADC_INJ_ReadConversionData32(ADC_TypeDef *ADCx, uint
 __STATIC_INLINE uint16_t LL_ADC_INJ_ReadConversionData12(ADC_TypeDef *ADCx, uint32_t Rank)
 {
   register __IO uint32_t *preg = __ADC_PTR_REG_OFFSET(ADCx->JDR1, __ADC_MASK_SHIFT(Rank, ADC_INJ_JDRX_REGOFFSET_MASK));
-<<<<<<< HEAD
   
   return (uint16_t)(READ_BIT(*preg,
-=======
-   return (uint16_t)(READ_BIT(*preg,
->>>>>>> origin/Anti-chavirement-v2
                              ADC_JDR1_JDATA)
                    );
 }
@@ -3585,12 +3581,8 @@ __STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_JEOS(ADC_TypeDef *ADCx)
   /*       end of unitary conversion.                                         */
   /*       Flag noted as "JEOC" is corresponding to flag "JEOS"               */
   /*       in other STM32 families).                                          */
-<<<<<<< HEAD
   return (READ_BIT(ADCx->SR, LL_ADC_FLAG_JEOS) == (LL_ADC_FLAG_JEOS));
 }
-=======
-  return (READ_BIT(ADCx->SR, LL_ADC_FLAG_JEOS) == (LL_ADC_FLAG_JEOS));}
->>>>>>> origin/Anti-chavirement-v2
 
 /**
   * @brief  Get flag ADC analog watchdog 1 flag
