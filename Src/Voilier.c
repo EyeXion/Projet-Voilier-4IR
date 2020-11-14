@@ -10,8 +10,6 @@
 #include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
 
-
-
 void SystemClock_Config(void);
 
 /**
@@ -25,7 +23,7 @@ void Setup(){
 	//ConfAntiChavirement();
 	ConfAllure();
 	ConfVoile();
-	//ConfGouvernail();
+	ConfGouvernail();
 
 
 }
@@ -59,12 +57,11 @@ void Background(){
 	TendreVoile(CalculerTension(RecupAllure())); //on tend la voile gr�ce � la tension obtenue
 
 	//Gouvernail
-	/*int valeurTelecommande = LireTelecommande(); //on lit la valeur renvoy�e par la t�l�commande
-	int vitesse = CalculerVitesse(valeurTelecommande);//gr�ace � la valeur de la telecommande on calcule la vitesse souhait�e
-	CommanderMoteur(vitesse);//On commande le moteur pour aller � la vitesse voulue
+	int commande = LireTelecommande(); //on lit la valeur renvoy�e par la t�l�commande
+	CommanderMoteur(commande); //On commande le moteur pour aller � la vitesse voulue
 
 	//Anti-Chavirement
-	int rouli = RecupRouli();
+	/*int rouli = RecupRouli();
 	int danger = CalculerDanger(rouli);//renvoi boolean : int � 0 si faux et 1 si vrai
 	if(danger){
 		TendreVoile(90); //si il y a danger on relache les voiles (relacher les voiles = les mettre � 90)
@@ -81,7 +78,7 @@ int main(){
 	while(1){
 		Background();
 	}
-} 
+}
 
 
 /**
@@ -133,7 +130,7 @@ void SystemClock_Config(void)
   LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
 
   /* Set systick to 1ms in using frequency set to 72MHz */
-  //LL_Init1msTick(72000000); !! d�commenter que si l'IT est r�cup�r�e
+  LL_Init1msTick(72000000); //!! d�commenter que si l'IT est r�cup�r�e
 
   /* Update CMSIS variable (which can be updated also through SystemCoreClockUpdate function) */
   LL_SetSystemCoreClock(72000000);

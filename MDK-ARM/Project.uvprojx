@@ -448,9 +448,15 @@
               <FilePath>..\Src\maths.c</FilePath>
             </File>
             <File>
+<<<<<<< HEAD
               <FileName>Transmission.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Src\Transmission.h</FilePath>
+=======
+              <FileName>Gouvernail.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Gouvernail.h</FilePath>
+>>>>>>> Gouvernail
             </File>
           </Files>
         </Group>
@@ -954,9 +960,15 @@
               <FilePath>..\Src\maths.c</FilePath>
             </File>
             <File>
+<<<<<<< HEAD
               <FileName>Transmission.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Src\Transmission.h</FilePath>
+=======
+              <FileName>Gouvernail.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Gouvernail.h</FilePath>
+>>>>>>> Gouvernail
             </File>
           </Files>
         </Group>
