@@ -472,6 +472,16 @@
               <FileType>1</FileType>
               <FilePath>..\Src\AntiChavirement.c</FilePath>
             </File>
+            <File>
+              <FileName>Securite.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\Securite.c</FilePath>
+            </File>
+            <File>
+              <FileName>Securite.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Securite.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -982,6 +992,16 @@
               <FileName>AntiChavirement.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\AntiChavirement.c</FilePath>
+            </File>
+            <File>
+              <FileName>Securite.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\Securite.c</FilePath>
+            </File>
+            <File>
+              <FileName>Securite.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\Securite.h</FilePath>
             </File>
           </Files>
         </Group>
