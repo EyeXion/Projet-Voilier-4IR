@@ -55,6 +55,20 @@ void EnvoiRegulier(char * Allure, char * tension){
 	LL_GPIO_ResetOutputPin(GPIOA,LL_GPIO_PIN_11);
 }
 
+void EnvoiExceptionnel(char * msgAlarme){
+	
+	LL_GPIO_SetOutputPin(GPIOA,LL_GPIO_PIN_11);
+	int tailleMessage = sizeof(msgAlarme);
+	int index  = 0;
+	while(index < tailleMessage){
+		if (LL_USART_IsActiveFlag_TXE(USART1)){ //On regarde si le flag de transmission terminée est actif
+			LL_USART_TransmitData8(USART1, (uint8_t) msgAlarme[index]); //On envoie le message (8 bits)
+			index++;
+		}
+	} 
+	
+}
+
 void SystemClock_Config(void)
 {
   /* Set FLASH latency */
@@ -100,12 +114,11 @@ int main(){
 	ConfSysTick();
 	ConfTransmission();
 	char * msg1 = "ok ";
-	char * msg2 = "coucou ";
-	//EnvoiRegulier(ToString(RecupAllure()),ToString(RecupTension()));
-	
+	char * msg2 = "coucou ";	
 	
 	while(1){
 		if (drapeauTransmission){
+			//EnvoiRegulier(ToString(RecupAllure()),ToString(RecupTension()));
 			EnvoiRegulier(msg1, msg2);
 			drapeauTransmission = 0;
 		}
