@@ -12,10 +12,15 @@ void ConfSysTick(){
 void SysTick_Handler(void)  {                               /* SysTick interrupt Handler. */
   msTicks++;  
 	
-	if (msTicks == 29){
+	if (msTicks % 30 == 0){
 		drapeauTransmission = 1;
+	}
+	
+	if (msTicks % 90 == 0) {
+		drapeauRecupSecurite = 1;
 		msTicks = 0;
 	}
+	
 }
 
 void ConfTransmission(){
