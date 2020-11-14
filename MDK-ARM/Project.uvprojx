@@ -403,11 +403,6 @@
               <FilePath>..\Src\Allure.c</FilePath>
             </File>
             <File>
-              <FileName>AntiCharvirement.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\AntiCharvirement.c</FilePath>
-            </File>
-            <File>
               <FileName>Batterie.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Batterie.c</FilePath>
@@ -907,11 +902,6 @@
               <FileName>Allure.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Allure.c</FilePath>
-            </File>
-            <File>
-              <FileName>AntiCharvirement.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\AntiCharvirement.c</FilePath>
             </File>
             <File>
               <FileName>Batterie.c</FileName>

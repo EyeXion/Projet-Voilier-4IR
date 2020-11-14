@@ -17,7 +17,7 @@
 	* @param  
   * @retval 
   */
-int CalculerDanger(int gamma);
+void CalculerDanger(int gamma);
 
 /**
 	* @brief  
@@ -27,12 +27,29 @@ int CalculerDanger(int gamma);
   */
 int RecupRouli();
 
+
 /**
 	* @brief  
-  * @note   Fonction à lancer avant toute autre. 
-	* @param  None
-  * @retval None
+  * @note  
+	* @param  
+  * @retval 
   */
-void ConfAntiChavirement();
+int RecupNiveauBatterie(void);
+
+/**
+	* @brief  
+  * @note  A lancer en 1er avant tout
+	* @param  
+  * @retval 
+  */
+void confSecurite(void);
+
+/**
+	* @brief  
+  * @note  
+	* @param  
+  * @retval 
+  */
+void CalculDangerNiveauBatterie(int niveau );
 
 #endif

@@ -15,9 +15,9 @@
 void SystemClock_Config(void);
 
 /**
-	* @brief configure tous les periphs qu'on va utiliser en appelant les 
+	* @brief configure tous les periphs qu'on va utiliser en appelant les
 					 fonctions de config de chaque "module"
-  * @note   
+  * @note
 	* @param None
   * @retval None
   */
@@ -26,58 +26,58 @@ void Setup(){
 	ConfAllure();
 	ConfVoile();
 	//ConfGouvernail();
-	
-	
+
+
 }
 
 
-//on utilise EnvoiRegulier de Transmission 
-//TODO : récuperer les  valeurs des params de EnvoiRegulier
-//Interruption toute les 3s via un Timer qui déclenche cette fonction qui permet d'envoyer ce qu'il faut
+//on utilise EnvoiRegulier de Transmission
+//TODO : rï¿½cuperer les  valeurs des params de EnvoiRegulier
+//Interruption toute les 3s via un Timer qui dï¿½clenche cette fonction qui permet d'envoyer ce qu'il faut
 
 /**
-	* @brief  
-  * @note   
-	* @param  
-  * @retval 
+	* @brief
+  * @note
+	* @param
+  * @retval
   */
 void Envoi3s(){
-	
+
 }
 
 /**
 	* @brief  tache qui va fonctionner en fond qui gere l'orientation
 						des voiles, le gouvernail et aussi le systeme anti-chavirement
-  * @note  relacher les voiles <=> tendre les voiles avec un angle à 90° 
+  * @note  relacher les voiles <=> tendre les voiles avec un angle ï¿½ 90ï¿½
 	* @param None
   * @retval None
   */
 void Background(){
 	//Voiles
 	int allure = RecupAllure(); //on recupere l'allulre via la girouette
-	int tensionVoile = CalculerTension(allure); //grace à l'allure on peut calculer la tension à appliquer sur la voile
-	TendreVoile(CalculerTension(RecupAllure())); //on tend la voile grâce à la tension obtenue
-	
-	//Gouvernail 
-	/*int valeurTelecommande = LireTelecommande(); //on lit la valeur renvoyée par la télécommande
-	int vitesse = CalculerVitesse(valeurTelecommande);//gràace à la valeur de la telecommande on calcule la vitesse souhaitée
-	CommanderMoteur(vitesse);//On commande le moteur pour aller à la vitesse voulue
-	
+	int tensionVoile = CalculerTension(allure); //grace ï¿½ l'allure on peut calculer la tension ï¿½ appliquer sur la voile
+	TendreVoile(CalculerTension(RecupAllure())); //on tend la voile grï¿½ce ï¿½ la tension obtenue
+
+	//Gouvernail
+	/*int valeurTelecommande = LireTelecommande(); //on lit la valeur renvoyï¿½e par la tï¿½lï¿½commande
+	int vitesse = CalculerVitesse(valeurTelecommande);//grï¿½ace ï¿½ la valeur de la telecommande on calcule la vitesse souhaitï¿½e
+	CommanderMoteur(vitesse);//On commande le moteur pour aller ï¿½ la vitesse voulue
+
 	//Anti-Chavirement
 	int rouli = RecupRouli();
-	int danger = CalculerDanger(rouli);//renvoi boolean : int à 0 si faux et 1 si vrai
+	int danger = CalculerDanger(rouli);//renvoi boolean : int ï¿½ 0 si faux et 1 si vrai
 	if(danger){
-		TendreVoile(90); //si il y a danger on relache les voiles (relacher les voiles = les mettre à 90)
+		TendreVoile(90); //si il y a danger on relache les voiles (relacher les voiles = les mettre ï¿½ 90)
 	}*/
-	
+
 }
 
 int main(){
-	
+
 	SystemClock_Config();
-	
+
 	Setup();
-	
+
 	while(1){
 		Background();
 	}
@@ -106,7 +106,7 @@ void SystemClock_Config(void)
 
   /* Enable HSE oscillator */
 	// ********* Commenter la ligne ci-dessous pour MCBSTM32 *****************
-	// ********* Conserver la ligne si Nucléo*********************************
+	// ********* Conserver la ligne si Nuclï¿½o*********************************
   LL_RCC_HSE_EnableBypass();
   LL_RCC_HSE_Enable();
   while(LL_RCC_HSE_IsReady() != 1)
@@ -133,7 +133,7 @@ void SystemClock_Config(void)
   LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
 
   /* Set systick to 1ms in using frequency set to 72MHz */
-  //LL_Init1msTick(72000000); !! décommenter que si l'IT est récupérée
+  //LL_Init1msTick(72000000); !! dï¿½commenter que si l'IT est rï¿½cupï¿½rï¿½e
 
   /* Update CMSIS variable (which can be updated also through SystemCoreClockUpdate function) */
   LL_SetSystemCoreClock(72000000);
@@ -173,4 +173,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-
