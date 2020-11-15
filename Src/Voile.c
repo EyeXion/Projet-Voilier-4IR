@@ -1,8 +1,5 @@
 #include "Voile.h"
 #include "stm32f1xx_ll_gpio.h"
-#include "stm32f1xx_ll_rcc.h" // utile dans la fonction SystemClock_Config
-#include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
-#include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_tim.h" 
 #include "stm32f1xx_ll_bus.h"
 #include "maths.h"  //Remplacer par maths.h quand on va tout faire marcher.

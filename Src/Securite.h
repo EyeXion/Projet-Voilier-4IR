@@ -7,7 +7,7 @@
 	* @param  
   * @retval 
   */
-void CalculerDangerChavirement(int gamma);
+int CalculerDangerChavirement(int gamma);
 
 /**
 	* @brief  
@@ -40,6 +40,6 @@ void ConfSecurite(void);
 	* @param  
   * @retval 
   */
-void CalculDangerNiveauBatterie(int niveau);
+int CalculerDangerNiveauBatterie(int niveau);
 
 #endif

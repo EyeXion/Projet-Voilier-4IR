@@ -38,4 +38,6 @@ int RecupAllure(void);
   */
 char * AllureToString(int alpha);
 
+int GirouetteInitialisee(void);
+
 #endif

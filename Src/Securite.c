@@ -99,14 +99,14 @@ int RecupNiveauBatterie(void){
 	* @param  un entier representant le niveau de batterie en pourcentage
   * @retval 
   */
-void CalculDangerNiveauBatterie(int niveau){
+int CalculerDangerNiveauBatterie(int niveau){
 	if ( niveau <= Seuil)
 	{
-		drapeauDangerBatterie = 1;
+		return 1;
 	}
 	else
 	{
-		drapeauDangerBatterie = 0 ;
+		return 1;
 	}
 }
 
@@ -117,15 +117,14 @@ void CalculDangerNiveauBatterie(int niveau){
       * @param  un entier representant l angle de rouli
     * @retval NONE
     */
-void CalculerDangerChavirement(int gamma){
+int CalculerDangerChavirement(int gamma){
 	if ( gamma >= SeuilAngle)
 	{
-		drapeauDangerRouli = 1;
-		TendreVoile(90); //On lache les voiles si danger de chavirement
+		return 1;
 	}
 	else
 	{
-		drapeauDangerRouli = 0 ;
+		return 1;
 	}
 }
 

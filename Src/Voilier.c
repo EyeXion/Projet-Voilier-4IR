@@ -11,30 +11,12 @@
 
 void SystemClock_Config(void);
 
-extern int drapeauRecupSecurite; // Flag qui est mis à 1 toute les 10 sec pour recuperer niveau batterie/rouli et envoi régulier
-extern int drapeauDangerBatterie; //Flag qui est mis à 1 toute les 10 sec si batterie faible --> envoie message alarme
-extern int drapeauDangerRouli; //Flag qui est mis à 1 toute les 10 sec si rouli pas bon --> envoie message alarme
-extern int drapeauTransmission;
-
-void ConfSysTick(){
-	NVIC_EnableIRQ(SysTick_IRQn);
+void ConfSysTick(void){
 	SysTick_Config(7200000);
 }
 
-void SysTick_Handler(void)  {                               /* SysTick interrupt Handler. */
-	static int msTicks = 0;
-	
-	msTicks++;  
-	
-	if (msTicks % 30 == 0){
-		drapeauTransmission = 1;
-	}
-	
-	if (msTicks % 90 == 0) {
-		drapeauRecupSecurite = 1;
-		msTicks = 0;
-	}
-	
+void SysTickEnableIT(void) {
+	NVIC_EnableIRQ(SysTick_IRQn);
 }
 
 /**
@@ -45,20 +27,15 @@ void SysTick_Handler(void)  {                               /* SysTick interrupt
   * @retval None
   */
 void Setup(){
+	
 	ConfSecurite();
 	ConfAllure();
 	ConfVoile();
 	ConfGouvernail();
 	ConfTransmission();
 	ConfSysTick();
-
-
 }
 
-
-//on utilise EnvoiRegulier de Transmission
-//TODO : r�cuperer les  valeurs des params de EnvoiRegulier
-//Interruption toute les 3s via un Timer qui d�clenche cette fonction qui permet d'envoyer ce qu'il faut
 
 /**
 	* @brief
@@ -67,33 +44,45 @@ void Setup(){
   * @retval
   */
 void Envoi3s(){
-
+	EnvoiRegulier(AllureToString(RecupAllure()), TensionVoileToString(RecupTensionVoile()));
 }
 
 /**
 	* @brief  tache qui va fonctionner en fond qui gere l'orientation
 						des voiles, le gouvernail et aussi le systeme anti-chavirement
-  * @note  relacher les voiles <=> tendre les voiles avec un angle � 90�
+  * @note  Le temps d'exécution de cette tache a été mesuré à environ 3.14ms, 
+					 on peut donc largement la lancer toutes les 100ms en interruption sans risque de trop mobiliser le CPU
 	* @param None
   * @retval None
   */
-void Background(){
+void Task100ms(){
 	//Voiles
-	int allure = RecupAllure(); //on recupere l'allulre via la girouette
-	int tensionVoile = CalculerTension(allure); //grace � l'allure on peut calculer la tension � appliquer sur la voile
-	TendreVoile(CalculerTension(RecupAllure())); //on tend la voile gr�ce � la tension obtenue
+	TendreVoile(CalculerTension(RecupAllure())); //on tend la voile grace à la tension obtenue a partir du calcul et de l'allure lue
 
 	//Gouvernail
-	int commande = LireTelecommande(); //on lit la valeur renvoy�e par la t�l�commande
-	CommanderMoteur(commande); //On commande le moteur pour aller � la vitesse voulue
+	CommanderMoteur(LireTelecommande()); //On commande le moteur pour aller à la vitesse lue a la télécommande
 
 	//Anti-Chavirement
-	/*int rouli = RecupRouli();
-	int danger = CalculerDanger(rouli);//renvoi boolean : int � 0 si faux et 1 si vrai
-	if(danger){
+	if(CalculerDangerChavirement(RecupRouli())){//renvoi boolean : int à 0 si faux et 1 si vrai
 		TendreVoile(90); //si il y a danger on relache les voiles (relacher les voiles = les mettre � 90)
-	}*/
+		EnvoiExceptionnel("Risque de chavirement, voiles choquées");//Et on prévient l'utilisateur
+	}
+	
+	//Anti-Chavirement
+	if(CalculerDangerNiveauBatterie(RecupNiveauBatterie())){//renvoi boolean : int à 0 si faux et 1 si vrai
+		EnvoiExceptionnel("Batterie faible");//Et on prévient l'utilisateur
+	}
+}
 
+void SysTick_Handler(void)  {                               /* SysTick interrupt Handler. */
+	static int compteur = 0;
+	compteur++;
+	if (compteur == 30) {
+		Envoi3s();
+		compteur = 0;
+	} else {
+		Task100ms();
+	}
 }
 
 int main(){
@@ -101,38 +90,17 @@ int main(){
 	SystemClock_Config();
 
 	Setup();
-
+	
+	EnvoiExceptionnel("Veuillez faire tourner la girouette SVP.");
+	
+	while(!GirouetteInitialisee()) {
+		EnvoyerCaractere();
+	}
+	
+	SysTickEnableIT();
+	
 	while(1){
-		int level ;
-		int rouli;
-		/* Envoi message toute les 3 sec sur l'Allure et la tension voile */
-		if (drapeauTransmission){ 
-			EnvoiRegulier(AllureToString(RecupAllure()), TensionVoileToString(RecupTensionVoile()));
-			drapeauTransmission = 0;
-		}
-		
-		/* Recuperation toute les 10 sec niveau batterie et angle chavirement, puis calcul des dangers */
-		if (drapeauRecupSecurite){
-			level = RecupNiveauBatterie();
-			CalculDangerNiveauBatterie( level );
-			rouli = RecupRouli();
-			CalculerDangerChavirement(rouli);
-			drapeauRecupSecurite = 0;
-		}
-		
-		/*Si batterie faible après recup (toute les 10 sec), envoi alerte batterie faible */
-		if (drapeauDangerBatterie){
-			char * msgBatterie = "Batterie faible";
-			EnvoiExceptionnel(msgBatterie);
-			drapeauDangerBatterie = 0;
-		}
-		
-		/*Si angle chavirement pas bon après recup (toute les 10 sec), envoi alerte chavirement */
-		if (drapeauDangerRouli){
-			char * msgRouli = "Bateau chavire !";
-			EnvoiExceptionnel(msgRouli);
-			drapeauDangerRouli = 0;
-		}
+		EnvoyerCaractere();
 	}
 }
 

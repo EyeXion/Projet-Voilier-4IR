@@ -93,6 +93,10 @@ char * AllureToString(int alpha) {
 	}		
 }
 
+int GirouetteInitialisee(void) {
+	return initialized;
+}
+
 void EXTI9_5_IRQHandler(void) {
 	LL_TIM_SetCounter(TIM3, 0);
 	initialized = 1;

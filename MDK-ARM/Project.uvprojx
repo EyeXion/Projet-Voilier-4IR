@@ -427,6 +427,11 @@
               <FileType>1</FileType>
               <FilePath>..\Src\Securite.c</FilePath>
             </File>
+            <File>
+              <FileName>string.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\string.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -907,6 +912,11 @@
               <FileName>Securite.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Securite.c</FilePath>
+            </File>
+            <File>
+              <FileName>string.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\string.c</FilePath>
             </File>
           </Files>
         </Group>
