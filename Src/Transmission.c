@@ -9,6 +9,7 @@
 #include "string.h"
 
 #define TAILLE_MESSAGE_MAX 100
+#define USARTX USART2
 
 // Structure pour gérer la transmission du message
 struct t_transmission {
@@ -41,14 +42,26 @@ static struct t_transmission transmission;
 
 void ConfTransmission(){
 	
-	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1); //On enable la clock pour l'USARt	
+	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_USART2); //On enable la clock pour l'USARt	
 	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA); //enable la clock du gpio où est l'USART
-	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_9,LL_GPIO_MODE_ALTERNATE); // Mode fonction alternative PIN USART Tx
-	LL_USART_Enable(USART1); //Enable Usart
-	LL_USART_EnableDirectionTx(USART1); //Enable direction Tx
-	LL_USART_SetParity(USART1,LL_USART_PARITY_NONE); // disable parity bit
-	LL_USART_SetStopBitsLength(USART1,LL_USART_STOPBITS_1);
-	LL_USART_SetBaudRate(USART1, 72000000,9600); //Set Baud Rate à 9600 (règle de trois avec 1 pour 36 000 0000
+	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_2,LL_GPIO_MODE_ALTERNATE); // Mode fonction alternative PIN USART Tx
+	
+	LL_USART_InitTypeDef USART_InitStruct;
+	LL_USART_StructInit(&USART_InitStruct);
+	USART_InitStruct.BaudRate = 9600; //Set Baud rate -> 19200Bd
+	USART_InitStruct.DataWidth = LL_USART_DATAWIDTH_8B; //Set data width -> 8bits
+	USART_InitStruct.Parity = LL_USART_PARITY_NONE;// Disable Parity
+	USART_InitStruct.StopBits = LL_USART_STOPBITS_1;// Set stop bit -> 1
+	USART_InitStruct.TransferDirection = LL_USART_DIRECTION_TX;//Set sens -> TX Only
+	LL_USART_Init(USARTX, &USART_InitStruct);// Applique les modifs
+	LL_USART_Enable(USARTX);// Rend l'USART enable A FAIRE EN DERNIER
+	
+	
+	/*LL_USART_EnableDirectionTx(USARTX); //Enable direction Tx
+	LL_USART_SetParity(USARTX,LL_USART_PARITY_NONE); // disable parity bit
+	LL_USART_SetStopBitsLength(USARTX,LL_USART_STOPBITS_1);
+	LL_USART_SetBaudRate(USARTX, 72000000,9600); //Set Baud Rate à 9600 (règle de trois avec 1 pour 36 000 0000
+	LL_USART_Enable(USARTX); //Enable Usart*/
 	
 	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_11,LL_GPIO_MODE_OUTPUT); 
 	LL_GPIO_SetPinOutputType(GPIOA,LL_GPIO_PIN_11,LL_GPIO_OUTPUT_PUSHPULL);
@@ -68,20 +81,20 @@ void EnvoiRegulier(char * Allure, char * tension){
 		_____________________________*/
 		
 		static char promptligne1[] = "Allure actuelle : ";
-		static int promptligne1size = sizeof(promptligne1);
+		static int promptligne1size = 19;
 		static char promptligne2[] = "Tension des voiles : ";
-		static int promptligne2size = sizeof(promptligne2);
+		static int promptligne2size = 22;
 		static char rc[] = "\n";
-		static int rcsize = sizeof(rc);
+		static int rcsize = 2;
 		
 		transmission.message[0] = '\0';
 		int current_size = 1;
 		
 		current_size = Concatenate(promptligne1, transmission.message, promptligne1size, current_size, TAILLE_MESSAGE_MAX);
-		current_size = Concatenate(Allure, transmission.message, sizeof(Allure), current_size, TAILLE_MESSAGE_MAX);
+		current_size = Concatenate(Allure, transmission.message, size_of(Allure), current_size, TAILLE_MESSAGE_MAX);
 		current_size = Concatenate(rc, transmission.message, rcsize, current_size, TAILLE_MESSAGE_MAX);
 		current_size = Concatenate(promptligne2, transmission.message, promptligne2size, current_size, TAILLE_MESSAGE_MAX);
-		current_size = Concatenate(tension, transmission.message, sizeof(tension), current_size, TAILLE_MESSAGE_MAX);
+		current_size = Concatenate(tension, transmission.message, size_of(tension), current_size, TAILLE_MESSAGE_MAX);
 		current_size = Concatenate(rc, transmission.message, rcsize, current_size, TAILLE_MESSAGE_MAX);
 		current_size = Concatenate(rc, transmission.message, rcsize, current_size, TAILLE_MESSAGE_MAX);
 		
@@ -122,9 +135,9 @@ void EnvoiExceptionnel(char * msgAlarme){
 		_____________________________*/
 		
 		static char prompt[] = "WARNING : ";
-		static int promptsize = sizeof(prompt);
+		static int promptsize = 11;
 		static char rc[] = "\n";
-		static int rcsize = sizeof(rc);
+		static int rcsize = 2;
 		
 		transmission.message[0] = '\0';
 		int current_size = 1;
@@ -132,7 +145,7 @@ void EnvoiExceptionnel(char * msgAlarme){
 		current_size = Concatenate(rc, transmission.message, rcsize, current_size, TAILLE_MESSAGE_MAX);
 		current_size = Concatenate(rc, transmission.message, rcsize, current_size, TAILLE_MESSAGE_MAX);
 		current_size = Concatenate(prompt, transmission.message, promptsize, current_size, TAILLE_MESSAGE_MAX);
-		current_size = Concatenate(msgAlarme, transmission.message, sizeof(msgAlarme), current_size, TAILLE_MESSAGE_MAX);
+		current_size = Concatenate(msgAlarme, transmission.message, size_of(msgAlarme), current_size, TAILLE_MESSAGE_MAX);
 		current_size = Concatenate(rc, transmission.message, rcsize, current_size, TAILLE_MESSAGE_MAX);
 		current_size = Concatenate(rc, transmission.message, rcsize, current_size, TAILLE_MESSAGE_MAX);
 		
@@ -157,14 +170,16 @@ void EnvoiExceptionnel(char * msgAlarme){
 
 void EnvoyerCaractere(void) {
 	if (transmission.envoyer) {
-		if (LL_USART_IsActiveFlag_TXE(USART1)) {//On regarde si le flag de transmission terminée est actif
+		LL_GPIO_SetOutputPin(GPIOA,LL_GPIO_PIN_11);
+		if (LL_USART_IsActiveFlag_TXE(USARTX)) {//On regarde si le flag de transmission terminée est actif
 		  if (transmission.position < transmission.taille_message) {
-				LL_USART_TransmitData8(USART1, (uint8_t)(transmission.message[transmission.position]));
+				LL_USART_TransmitData8(USARTX, (uint8_t)(transmission.message[transmission.position]));
 				transmission.position += 1;
 			} else {
 				transmission.envoyer = 0;
 				transmission.exceptionnel = 0;
 			}
 		}
+		LL_GPIO_ResetOutputPin(GPIOA,LL_GPIO_PIN_11);
 	}	
 }

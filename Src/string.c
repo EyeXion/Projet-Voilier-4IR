@@ -9,3 +9,12 @@ int Concatenate(char * chaine1, char * chaine2, int sizechaine1, int sizechaine2
 		return 0;
 	}
 }
+
+int size_of(char * chaine) {
+	int i = 0;
+	while (chaine[i] != '\0') {
+		i++;
+	}
+	
+	return i+1;
+}

@@ -13,9 +13,6 @@ void SystemClock_Config(void);
 
 void ConfSysTick(void){
 	SysTick_Config(7200000);
-}
-
-void SysTickEnableIT(void) {
 	NVIC_EnableIRQ(SysTick_IRQn);
 }
 
@@ -33,7 +30,6 @@ void Setup(){
 	ConfVoile();
 	ConfGouvernail();
 	ConfTransmission();
-	ConfSysTick();
 }
 
 
@@ -97,7 +93,7 @@ int main(){
 		EnvoyerCaractere();
 	}
 	
-	SysTickEnableIT();
+	ConfSysTick();
 	
 	while(1){
 		EnvoyerCaractere();
@@ -154,7 +150,7 @@ void SystemClock_Config(void)
   LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
 
   /* Set systick to 1ms in using frequency set to 72MHz */
-  LL_Init1msTick(72000000); //!! d�commenter que si l'IT est r�cup�r�e
+  //LL_Init1msTick(72000000); //!! d�commenter que si l'IT est r�cup�r�e
 
   /* Update CMSIS variable (which can be updated also through SystemCoreClockUpdate function) */
   LL_SetSystemCoreClock(72000000);

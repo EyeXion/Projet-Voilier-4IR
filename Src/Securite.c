@@ -64,12 +64,12 @@ void ConfSecurite(){
 	
 	
 	
-	LL_ADC_StartCalibration(ADC1);
+	/*LL_ADC_StartCalibration(ADC1);
 	
 	
 	//Tant que calibration par terminée on enable pas
 	while(LL_ADC_IsCalibrationOnGoing(ADC1)){
-	}
+	}*/
 	
 		//Activation de l'ADC (???)
 	LL_ADC_Enable(ADC1);
@@ -89,7 +89,7 @@ int RecupNiveauBatterie(void){
 		// R?cuperation de la valeur apres conversion
  		int NiveauBatterie = LL_ADC_INJ_ReadConversionData12(ADC1,LL_ADC_INJ_RANK_2);
 		// Valeur code sur 12 bits : 0 a 4095 ; on veut Niveau de batterie en pourcentage
-		return NiveauBatterie * 100 / 4095 ;
+		return (int)((float)(NiveauBatterie) * 100.0 / 4095.0) ;
 }
 
 
@@ -106,7 +106,7 @@ int CalculerDangerNiveauBatterie(int niveau){
 	}
 	else
 	{
-		return 1;
+		return 0;
 	}
 }
 
@@ -124,7 +124,7 @@ int CalculerDangerChavirement(int gamma){
 	}
 	else
 	{
-		return 1;
+		return 0;
 	}
 }
 
