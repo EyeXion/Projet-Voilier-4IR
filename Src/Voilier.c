@@ -9,6 +9,10 @@
 #include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
 
+
+/* PERSONNES QUI ONT TRAVAILLE SUR CE MODULE : PAUL, ELIES, AURIANE, ELIES */
+
+
 void SystemClock_Config(void);
 
 void ConfSysTick(void){
@@ -53,7 +57,7 @@ void Envoi3s(){
   */
 void Task100ms(){
 	
-		int dangerRoulis = 0; //Variable qui permet de ne pas tendre les voiles si il y a trop de roulis
+	int dangerRoulis = 0; //Variable qui permet de ne pas tendre les voiles si il y a trop de roulis
 	
 		//Anti-Chavirement
 	if(CalculerDangerChavirement(RecupRouli())){//renvoi boolean : int à 0 si faux et 1 si vrai

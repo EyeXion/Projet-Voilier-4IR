@@ -1,6 +1,8 @@
 #ifndef ALLURE_H
 #define ALLURE_H
 
+/* PERSONNES QUI ONT TRAVAILLE SUR CE MODULE : PAUL */
+
 /**
 	* @brief  Configure la girouette pour la détection de l'allure (sens du vent).
   * @note   Configuration des ports PA6 et 7 en alternate input pour récupérer les signaux

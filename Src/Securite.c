@@ -75,12 +75,6 @@ void ConfSecurite(){
 	LL_ADC_Enable(ADC1);
 }
 
-/**
-	* @brief  Recuperer le niveau de batterie
-  * @note   ADC1 -> Channel 12 (Rang 2)
-	* @param  None
-  * @retval niveau de batterie en pourcentage
-  */
 int RecupNiveauBatterie(void){
 		// Lancement de la conversion
 	  LL_ADC_INJ_StartConversionSWStart(ADC1);
@@ -93,12 +87,6 @@ int RecupNiveauBatterie(void){
 }
 
 
-/**
-	* @brief  Met le flag de dangerBatterie à 1 si batterie faible.
-  * @note
-	* @param  un entier representant le niveau de batterie en pourcentage
-  * @retval 
-  */
 int CalculerDangerNiveauBatterie(int niveau){
 	if ( niveau <= Seuil)
 	{
@@ -111,12 +99,6 @@ int CalculerDangerNiveauBatterie(int niveau){
 }
 
 
-  /*
-    * @brief   Mets le flag drapeauDangerRouli a 1 si l angle de rouli est mauvais
-    * @note Si le voilier prend un angle de roulis supe´rieur a` 40° -> MSG de danger + voiles sont imme´diatement rela^che´es 
-      * @param  un entier representant l angle de rouli
-    * @retval NONE
-    */
 int CalculerDangerChavirement(int gamma){
 	if ( gamma >= SeuilAngle)
 	{
@@ -128,12 +110,6 @@ int CalculerDangerChavirement(int gamma){
 	}
 }
 
-/*
-  * @brief  Recuperer l angle de rouli
-  * @note   ADC1 -> Channel 10 (Rang 1)
-  * @param  None
-  * @retval angle de rouli
-  */
 int RecupRouli(){
 			// Lancement de la conversion
 	  LL_ADC_INJ_StartConversionSWStart(ADC1);

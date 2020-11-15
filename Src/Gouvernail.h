@@ -1,6 +1,9 @@
 #ifndef GOUVERNAIL_H
 #define GOUVERNAIL_H
 
+/* PERSONNES QUI ONT TRAVAILLE SUR CE MODULE : PAUL, ELISE */
+
+
 /**
 	* @brief  Configure le récepteur de la télécommande ainsi que le plateau rotatif.
   * @note   Configuration du port PB6 et 7 en alternate input pour récupérer les signaux de la télécommande
