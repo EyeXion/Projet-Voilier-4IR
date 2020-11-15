@@ -52,14 +52,12 @@ void Envoi3s(){
   * @retval None
   */
 void Task100ms(){
-	//Voiles
-	TendreVoile(CalculerTension(RecupAllure())); //on tend la voile grace à la tension obtenue a partir du calcul et de l'allure lue
-
-	//Gouvernail
-	CommanderMoteur(LireTelecommande()); //On commande le moteur pour aller à la vitesse lue a la télécommande
-
-	//Anti-Chavirement
+	
+		int dangerRoulis = 0; //Variable qui permet de ne pas tendre les voiles si il y a trop de roulis
+	
+		//Anti-Chavirement
 	if(CalculerDangerChavirement(RecupRouli())){//renvoi boolean : int à 0 si faux et 1 si vrai
+		dangerRoulis = 1; //Pour pas retendre directement les voiles juste après.
 		TendreVoile(90); //si il y a danger on relache les voiles (relacher les voiles = les mettre � 90)
 		EnvoiExceptionnel("Risque de chavirement, voiles choquées");//Et on prévient l'utilisateur
 	}
@@ -68,6 +66,14 @@ void Task100ms(){
 	if(CalculerDangerNiveauBatterie(RecupNiveauBatterie())){//renvoi boolean : int à 0 si faux et 1 si vrai
 		EnvoiExceptionnel("Batterie faible");//Et on prévient l'utilisateur
 	}
+	
+	//Voiles
+	if (!dangerRoulis){ //On vérifie qu'il n'y ait pas de roulis avant de tendre les voiles selon l'allure
+		TendreVoile(CalculerTension(RecupAllure())); //on tend la voile grace à la tension obtenue a partir du calcul et de l'allure lue
+	}
+
+	//Gouvernail
+	CommanderMoteur(LireTelecommande()); //On commande le moteur pour aller à la vitesse lue a la télécommande
 }
 
 void SysTick_Handler(void)  {                               /* SysTick interrupt Handler. */
