@@ -3,7 +3,7 @@
 #include "stm32f1xx_ll_tim.h" // TIMER
 #include "maths.h"
 
-#define MAX_PWM (19999)
+#define MAX_PWM (50)
 #define MAX_PWM_OUTPUT (34999)
 
 /**
@@ -70,7 +70,12 @@ void ConfGouvernail(void) {
   */
 int LireTelecommande(void) {
 	int lecture = LL_TIM_IC_GetCaptureCH2(TIM4) + 1;
-	return ((lecture - 1500) / 5);
+	int Valeur_Lue = ((lecture - 1500) / 5);
+	if (abs(Valeur_Lue) < 10) {
+		return 0;
+	} else {
+		return Valeur_Lue;
+	}
 }
 
 /**

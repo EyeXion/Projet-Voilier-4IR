@@ -7,17 +7,13 @@
 #include "stm32f1xx_ll_rcc.h" // utile dans la fonction SystemClock_Config
 #include "Voile.h"
 
+#define SEUIL45DEGRESSENS1 (1853)
+
+#define SEUIL45DEGRESSENS2 (2457)
+
 
 // Seuil represente la valeur (en %) en dessous de laquelle le niveau de batterie est consideree faible
 #define Seuil (20)
-
-// Seuil represente la valeur de l'angle au dessus de laquelle le chavirement est trop prononcé
-#define SeuilAngle (40)
-
-
-int drapeauRecupSecurite = 0; // Flag qui est mis à 1 toute les 10 sec pour recuperer niveau batterie/rouli et envoi régulier
-int drapeauDangerBatterie = 0; //Flag qui est mis à 1 toute les 10 sec si batterie faible --> envoie message alarme
-int drapeauDangerRouli = 0; //Flag qui est mis à 1 toute les 10 sec si rouli pas bon --> envoie message alarme
 
 void ConfSecurite(){
 	//On est pas sûrs pour ADC 1, voir datasheet page 28
@@ -100,7 +96,7 @@ int CalculerDangerNiveauBatterie(int niveau){
 
 
 int CalculerDangerChavirement(int gamma){
-	if ( gamma >= SeuilAngle)
+	if ((gamma > SEUIL45DEGRESSENS2) || (gamma < SEUIL45DEGRESSENS1))
 	{
 		return 1;
 	}
@@ -117,6 +113,6 @@ int RecupRouli(){
  		while(!LL_ADC_IsActiveFlag_JEOS(ADC1)){}
 		// R?cuperation de la valeur apres conversion
  		int NiveauChavirement = LL_ADC_INJ_ReadConversionData12(ADC1,LL_ADC_INJ_RANK_1);
-		return 0; // Trouver le calcul de l'angle
+		return NiveauChavirement;
 }
 

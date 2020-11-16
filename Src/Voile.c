@@ -3,6 +3,7 @@
 #include "stm32f1xx_ll_tim.h" 
 #include "stm32f1xx_ll_bus.h"
 #include "maths.h"  //Remplacer par maths.h quand on va tout faire marcher.
+#include "string.h"
  
 #define ARR (19999)
 #define PSC (71)
@@ -10,22 +11,22 @@
 #define channel (1)
 #define A_ALPHA_TO_BETA (2.0/3.0) //Coefficient directeur de la partie linéaire de la fonction transformant l'allure en angle de voile
 #define B_ALPHA_TO_BETA (-30.0) //Ordonnée a l'origine de cette même fonction
-#define GAMMA_90 (19900) //Valeur du registre commandant la largeur de la PWM pour les voiles lachées
-#define GAMMA_0 (100) //Valeur du registre commandant la largeur de la PWM pour les voiles bordées au maximum
+#define GAMMA_90 (2100) //Valeur du registre commandant la largeur de la PWM pour les voiles lachées
+#define GAMMA_0 (1000) //Valeur du registre commandant la largeur de la PWM pour les voiles bordées au maximum
 #define A_BETA_TO_GAMMA ((GAMMA_90 - GAMMA_0)/90.0) //Coefficient directeur de la relation entre l'angle de voile et la PWM
 #define B_BETA_TO_GAMMA (GAMMA_0) //Ordonnée a l'origine
 
 //Valeurs de CCR1 pour la PWM output
-#define POSITION_00 1000
-#define POSITION_10 1100
-#define POSITION_20 1200
-#define POSITION_30 1300
-#define POSITION_40 1400
-#define POSITION_50 1500
-#define POSITION_60 1600
-#define POSITION_70 1700
-#define POSITION_80 1800
-#define POSITION_90 1900
+#define POSITION_00 2100
+#define POSITION_10 1880
+#define POSITION_20 1770
+#define POSITION_30 1660
+#define POSITION_40 1550
+#define POSITION_50 1440
+#define POSITION_60 1330
+#define POSITION_70 1220
+#define POSITION_80 1110
+#define POSITION_90 1000
 
 
 int angleVoileActuel = 0; //angle de la voile. Mis à jour quans on la tend. de 0 à  45.
@@ -34,6 +35,7 @@ int angleVoileActuel = 0; //angle de la voile. Mis à jour quans on la tend. de 0
 
 void ConfVoile(void){
 	 LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA); //Enable l'horloge du GPIOA
+	 LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_TIM1);
 	 LL_TIM_SetAutoReload(Timer, ARR); //On règle l'ARR
 	 LL_TIM_SetPrescaler(Timer, PSC); //On règle le PSC
 	 LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_8,LL_GPIO_MODE_ALTERNATE); //Pin en mode output alternate
@@ -45,6 +47,7 @@ void ConfVoile(void){
 	 LL_TIM_EnableCounter(Timer); //On commence le comptage
 }
 
+float res;
 
 int RecupTensionVoile(void){
 	return angleVoileActuel;
@@ -53,17 +56,18 @@ int RecupTensionVoile(void){
 
 int CalculerTension(int alpha){
 	if (abs(alpha) < 45){
+		res = 0;
 		return 0;
 	} else {
-		float res = A_ALPHA_TO_BETA * (float)abs(alpha) + B_ALPHA_TO_BETA;
+		res = A_ALPHA_TO_BETA * (float)abs(alpha) + B_ALPHA_TO_BETA;
 		return (int)res;
 	}
 }
 
-
+float angle_voile;
 void TendreVoile(int theta)
 {
-	if (theta < 5){
+	/*if (theta < 5){
 		Timer->CCR1 = POSITION_00;
 		angleVoileActuel = 0;
 	}
@@ -102,12 +106,30 @@ void TendreVoile(int theta)
 	else{
 		Timer->CCR1 = POSITION_90;
 		angleVoileActuel = 90;
-	}
+	}*/
 	
-	
-	//Timer->CCR1 = (int)(A_BETA_TO_GAMMA * (float)theta + B_BETA_TO_GAMMA) ;
+	angleVoileActuel = (A_BETA_TO_GAMMA * (float)theta + B_BETA_TO_GAMMA) ;
+	Timer->CCR1 = (int)angleVoileActuel ;
 }
 
 char * TensionVoileToString(int theta) {
-	return "";
+	if (theta < 10) {
+		return "Voiles bordees";
+	} else if (theta < 20) {
+		return "Voiles a 20 degres";
+	} else if (theta < 30) {
+		return "Voiles a 30 degres";
+	} else if (theta < 40) {
+		return "Voiles a 40 degres";
+	} else if (theta < 50) {
+		return "Voiles a 50 degres";
+	} else if (theta < 60) {
+		return "Voiles a 60 degres";
+	} else if (theta < 70) {
+		return "Voiles a 70 degres";
+	} else if (theta < 80) {
+		return "Voiles a 80 degres";
+	} else {
+		return "Voiles choquees";
+	} 
 }

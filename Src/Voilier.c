@@ -59,11 +59,11 @@ void Task100ms(){
 	
 	int dangerRoulis = 0; //Variable qui permet de ne pas tendre les voiles si il y a trop de roulis
 	
-		//Anti-Chavirement
+	//Anti-Chavirement
 	if(CalculerDangerChavirement(RecupRouli())){//renvoi boolean : int à 0 si faux et 1 si vrai
 		dangerRoulis = 1; //Pour pas retendre directement les voiles juste après.
-		TendreVoile(90); //si il y a danger on relache les voiles (relacher les voiles = les mettre � 90)
-		EnvoiExceptionnel("Risque de chavirement, voiles choquées");//Et on prévient l'utilisateur
+		TendreVoile(0); //si il y a danger on relache les voiles (relacher les voiles = les mettre � 90)
+		EnvoiExceptionnel("Risque de chavirement, voiles choquees");//Et on prévient l'utilisateur
 	}
 	
 	//Anti-Chavirement

@@ -53,19 +53,19 @@ void ConfAllure(void) {
 	Tim3Initializer.IC2Polarity = LL_TIM_IC_POLARITY_RISING;
 	Tim3Initializer.IC2Prescaler = LL_TIM_ICPSC_DIV1;
 	LL_TIM_ENCODER_Init(TIM3, &Tim3Initializer);
-	LL_TIM_SetAutoReload(TIM3, 359);
+	LL_TIM_SetAutoReload(TIM3, 719);
 	LL_TIM_EnableCounter(TIM3);
 }
-
+int retourCapteur;
 int RecupAllure(void) {
 	if (!initialized) {
 		return 180; //Si jamais la girouette n'est pas initialisée, on relache les voiles (comme en cas d'alerte dee chavirement)
 	} else {
-		int retourCapteur = (int)LL_TIM_GetCounter(TIM3);
-		if (retourCapteur < 180) {
-			return retourCapteur;
+		retourCapteur = (int)LL_TIM_GetCounter(TIM3);
+		if (retourCapteur < 360) {
+			return (retourCapteur/2);
 		} else {
-			return retourCapteur - 360;
+			return (retourCapteur + 720)/2;
 		}
 	}
 }
@@ -75,7 +75,7 @@ char * AllureToString(int alpha) {
 	if (alpha_abs < 45) {
 		return "Vent debout";
 	} else if (alpha < 55) {
-		return "Près";
+		return "Pres";
 	} else if (alpha < 65) {
 		return "Bon plein";
 	} else if (alpha < 80) {
@@ -87,7 +87,7 @@ char * AllureToString(int alpha) {
 	} else if (alpha < 155) {
 		return "Grand largue";
 	} else if (alpha < 180) {
-		return "Vent arrière";
+		return "Vent arriere";
 	} else {
 		return "ERROR";
 	}		
