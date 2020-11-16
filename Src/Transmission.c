@@ -9,7 +9,7 @@
 #include "string.h"
 
 #define TAILLE_MESSAGE_MAX 100
-#define USARTX USART2
+#define USARTX USART1
 
 // Structure pour gérer la transmission du message
 struct t_transmission {
@@ -42,9 +42,9 @@ static struct t_transmission transmission;
 
 void ConfTransmission(){
 	
-	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_USART2); //On enable la clock pour l'USARt	
+	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1); //On enable la clock pour l'USARt	
 	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA); //enable la clock du gpio où est l'USART
-	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_2,LL_GPIO_MODE_ALTERNATE); // Mode fonction alternative PIN USART Tx
+	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_9,LL_GPIO_MODE_ALTERNATE); // Mode fonction alternative PIN USART Tx
 	
 	LL_USART_InitTypeDef USART_InitStruct;
 	LL_USART_StructInit(&USART_InitStruct);
